@@ -8,6 +8,10 @@ class BottomSheetDialogDemo extends StatefulWidget {
 }
 
 class _BottomSheetDialogDemoState extends State<BottomSheetDialogDemo> {
+  final allItems = List<String>.generate(50, (i) => "State $i");
+  var items = <String>[];
+  TextEditingController editingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,104 +55,139 @@ class _BottomSheetDialogDemoState extends State<BottomSheetDialogDemo> {
   }
 
   void showSimpleDialog() {
+    items.clear();
+    items.addAll(allItems);
     showModalBottomSheet(
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      backgroundColor: Colors.transparent,
+      /* shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),*/
       context: context,
-      builder: (context) => Column(mainAxisSize: MainAxisSize.min, children: [
-        Container(
-          color: Colors.blueGrey.withAlpha(100),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "Select Item",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-                ),
-              ),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.close, size: 20),
-                  ))
-            ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
-          child: TextField(
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(0, 2, 14, 0),
-              prefixIcon: Icon(Icons.search, color: Colors.black26),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              hintText: ' Search',
-            ),
-          ),
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(child: Text("Babe")),
-              flex: 2,
-            ),
-            Expanded(
-              child: Container(child: Text("I don't miss you")),
-              flex: 2,
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(1.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
+      builder: (context) => StatefulBuilder(
+          builder: (BuildContext context,
+                  StateSetter setModalState /*You can rename this!*/) =>
+              DraggableScrollableSheet(
+                initialChildSize: 0.9,
+                maxChildSize: 0.9,
+                minChildSize: 0.5,
+                builder:
+                    (BuildContext context, ScrollController scrollController) =>
+                        Container(
+                  decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child:  Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-                          child: Text("All",
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(10))),
+                  child: Column(mainAxisSize: MainAxisSize.max, children: [
+                    Container(
+                      color: Colors.blueGrey.withAlpha(100),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          const Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Select State",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 14)),
+                                  fontWeight: FontWeight.w500, fontSize: 15),
+                            ),
+                          ),
+                          Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(Icons.close, size: 20),
+                              ))
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                      child: TextField(
+                        controller: editingController,
+                        onChanged: (value) {
+                          setModalState(() {
+                            filterSearchResults(value);
+                          });
+                        },
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.fromLTRB(0, 2, 14, 0),
+                          prefixIcon: Icon(Icons.search, color: Colors.black26),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          hintText: 'Search',
                         ),
                       ),
                     ),
+                    Expanded(
+                      child: setStateList(),
+                    )
+                  ]),
+                ),
+              )),
+    );
+  }
+
+  Widget setStateList() => ListView.builder(
+        itemCount: items.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, i) {
+          return ListTile(
+            title: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 9, 0, 9),
+                    child: Text(
+                      '${items[i]}',
+                      style: TextStyle(fontSize: 18, color: Colors.blue),
+                    ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-                    child: Text("Individuals",
-                        style:
-                            TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
-                  ),
-                  Text("Fleets",
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14))
+                  Divider()
                 ],
               ),
             ),
-          ),
-        )
-      ]),
-    );
+            onTap: (){
+              print(items[i]);
+            },
+          );
+        },
+      );
+
+  void filterSearchResults(String value) {
+    print(value);
+    List<String> dummySearchList = <String>[];
+    dummySearchList.addAll(allItems);
+
+    if (value.isNotEmpty) {
+      List<String> dummyListData = <String>[];
+      for (var item in dummySearchList) {
+        if (item.toLowerCase().contains(value.toLowerCase())) {
+          dummyListData.add(item);
+        }
+      }
+      setState(() {
+        items.clear();
+        items.addAll(dummyListData);
+      });
+      return;
+    } else {
+      setState(() {
+        items.clear();
+        items.addAll(allItems);
+      });
+    }
   }
 }
