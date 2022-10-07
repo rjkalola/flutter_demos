@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
-class BottomSheetDialogDemo extends StatefulWidget {
-  const BottomSheetDialogDemo({Key? key}) : super(key: key);
+class BottomSheetDialogTabDemo extends StatefulWidget {
+  const BottomSheetDialogTabDemo({Key? key}) : super(key: key);
 
   @override
-  _BottomSheetDialogDemoState createState() => _BottomSheetDialogDemoState();
+  BottomSheetDialogTabDemoState createState() =>
+      BottomSheetDialogTabDemoState();
 }
 
-class _BottomSheetDialogDemoState extends State<BottomSheetDialogDemo> {
+class BottomSheetDialogTabDemoState extends State<BottomSheetDialogTabDemo> {
+  @override
+  void initState() {
+    
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,9 +70,11 @@ class _BottomSheetDialogDemoState extends State<BottomSheetDialogDemo> {
         minChildSize: 0.5,
         builder: (BuildContext context, ScrollController scrollController) =>
             Container(
-              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
-              child: Column(mainAxisSize: MainAxisSize.max, children: [
-          Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
+          child: Column(mainAxisSize: MainAxisSize.max, children: [
+            Container(
               color: Colors.blueGrey.withAlpha(100),
               child: Stack(
                 alignment: Alignment.center,
@@ -74,7 +83,8 @@ class _BottomSheetDialogDemoState extends State<BottomSheetDialogDemo> {
                     alignment: Alignment.center,
                     child: Text(
                       "Select State",
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
                     ),
                   ),
                   Align(
@@ -87,8 +97,8 @@ class _BottomSheetDialogDemoState extends State<BottomSheetDialogDemo> {
                       ))
                 ],
               ),
-          ),
-          const Padding(
+            ),
+            const Padding(
               padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
               child: TextField(
                 decoration: InputDecoration(
@@ -102,65 +112,60 @@ class _BottomSheetDialogDemoState extends State<BottomSheetDialogDemo> {
                   hintText: ' Search',
                 ),
               ),
-          ),
-          Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(child: Text("Babe")),
-                  flex: 2,
-                ),
-                Expanded(
-                  child: Container(child: Text("I don't miss you")),
-                  flex: 2,
-                ),
-              ],
-          ),
-          Padding(
+            ),
+            Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Container(
                 decoration: const BoxDecoration(
                   color: Colors.black12,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(1.0),
                   child: Row(
+                    mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: Expanded(
-                          flex: 1,
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
                           child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-                              child: Text("All",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500, fontSize: 14)),
-                            ),
+                            padding: EdgeInsets.fromLTRB(0, 9, 0, 9),
+                            child: Text("All",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500, fontSize: 14)),
                           ),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-                        child: Text("Individuals",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500, fontSize: 14)),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                          child: Text("Individuals",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 14)),
+                        ),
                       ),
-                      Text("Fleets",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 14))
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
+                          child: Text("Individuals",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 14)),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
-          )
-        ]),
             ),
+          ]),
+        ),
       ),
     );
   }

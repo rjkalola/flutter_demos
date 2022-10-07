@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demos/bottonsheet_dialog.dart';
 
+import 'bottonsheet_dialog_with_tab.dart';
+import 'contacts_list.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -26,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const BottomSheetDialogDemo(),
+      home: ContactListPage(),
     );
   }
 }
