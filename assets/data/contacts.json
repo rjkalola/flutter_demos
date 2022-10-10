@@ -1,84 +1,98 @@
 [
   {
     "name": "Alice",
+    "isFleets": true,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Ashish",
+    "isFleets": false,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Ashish",
+    "isFleets": true,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Ashish",
+    "isFleets": false,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Ashish",
+    "isFleets": true,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Bob",
+    "isFleets": false,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "David",
+    "isFleets": true,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Doris",
+    "isFleets": true,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Don",
+    "isFleets": false,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Jack",
+    "isFleets": true,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Rose",
+    "isFleets": true,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Rocky",
+    "isFleets": false,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Salman",
+    "isFleets": true,
     "phone": [
       "18221338086"
     ]
   },
   {
     "name": "Sally",
+    "isFleets": false,
     "phone": [
       "18221338086"
     ]
